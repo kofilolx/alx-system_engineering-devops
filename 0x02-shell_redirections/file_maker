@@ -1,0 +1,12 @@
+#!/bin/bash
+
+read -p "Enter names of all files to be created: " file_names
+
+for file_name in $file_names; do
+    touch "$file_name"
+    echo "#!/bin/bash" > "$file_name"
+    chmod u+x "$file_name"
+done
+
+echo -e "Files created successfully with execute permissions. \n"
+
