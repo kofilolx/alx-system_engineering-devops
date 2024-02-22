@@ -1,0 +1,11 @@
+#!/bin/bash
+
+read -p "Enter commit msg: " commit_msg
+#Add content of local repo to remote
+git add .
+#commit directory or content to remote 
+git commit -m "$commit_msg"
+#Send local file to remote
+git push
+
+
