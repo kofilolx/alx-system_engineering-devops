@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# Displays protocols, port and sockets on servers
-netstat --1 --program
-#!/usr/bin/env bash
 # Displays listening ports. Includes listening sockets as well
 # + as the PID and name of the program to which each socket belongs.
 
