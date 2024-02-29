@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Displays protocols and sockets on servers
+netstat --listening --program
