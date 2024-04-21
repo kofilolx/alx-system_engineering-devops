@@ -1,3 +1,4 @@
+#!/usr/bin/pup
 # install puppet-lint using Puppet
 
 package { 'puppet-lint':
