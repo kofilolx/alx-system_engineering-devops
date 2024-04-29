@@ -7,3 +7,28 @@
 # Install and configure HAproxy on my lb-01 server.
 sudo apt-get -y update
 apt-get -y install haproxy
+
+
+server_config='
+frontend wickhub_frontend
+        bind *:80
+        mode http
+        default_backend wickhub_servers
+backend wickhub_servers
+        balance roundrobin
+	option httpclose
+	option forwardfor
+        server 469255-web-01 3.84.237.7:80 check
+        server 469255-web-02 54.160.101.253:80 check
+'
+echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+# enable HAProxy to be started by init script
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+# Testing the HAProxy configuration file
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
+# Restarting HAProxy service
+sudo service haproxy start
+sudo service haproxy restart
