@@ -34,22 +34,24 @@ defaults
         errorfile 504 /etc/haproxy/errors/504.http
 
 frontend wickhub_frontend
-        bind *:80
-        mode http
-        http-request redirect scheme https code 301 unless { ssl_fc }
-        http-request set-header X_Forwarded-Proto http
+        bind    *:80
+        mode    http
+        reqadd  X-Forwarded-Proto:\ http
+        redirect scheme https  code 301 if !{ ssl_fc }
         default_backend wickhub_servers
 
 frontend wickhub_frontend-https
-        bind *:443 ssl crt /etc/haproxy/certs/www.wickhub.tech.pem
-        reqadd X-Forwarded-Proto:\ https
-        acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+        bind    *:443 ssl crt /etc/haproxy/certs/www.wickhub.tech.pem
+        reqadd  X-Forwarded-Proto:\ https
+        acl     letsencrypt-acl path_beg /.well-known/acme-challenge/
         use_backend letsencrypt-backend if letsencrypt-acl
         default_backend wickhub_servers
 
 backend wickhub_servers
         balance roundrobin
-        option httpclose
-        option forwardfor
+        redirect scheme https if !{ ssl_fc }
         server 469255-web-01 3.84.237.7:80 check
         server 469255-web-02 54.160.101.253:80 check
+
+backend letsencrypt-backend
+    server letsencrypt 127.0.0.1:54321
