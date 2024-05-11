@@ -1,4 +1,3 @@
-Devops
 # What happens when you type google.com in your browser and press Enter
 ![enter image description here](https://media.licdn.com/dms/image/D4D12AQE00CjiqXIJKA/article-cover_image-shrink_720_1280/0/1673221771197?e=2147483647&v=beta&t=ucTp68uKCq8b2r5TWq1OO2t9lMRPkoRTV3ESaczYXDE)
 When you enter a website domain into your browser, you're invoking a global set of standards. Consider the process when you type "google.com" and press Enter. It's essential to understand this mechanism, starting with a simplified example.
@@ -79,6 +78,7 @@ The Codebase is often PHP, but Java Applets were run through the application ser
 In our Amazon example, the Codebase is seen in the e-commerce functionality, and how reviews are handled and pictures are displayed.
 
 **Database**
+![Illustrative](https://media.licdn.com/dms/image/D4D22AQGlUWabXvPkfA/feedshare-shrink_2048_1536/0/1697347941241?e=2147483647&v=beta&t=H29hRDdHWJNn9cbQsXki2MOaLXqNOBfQljlcoqCsQVU)
 The Database (**DB**) is the last component of a server. Simply put, a DB is a structured set of data held in a computer, especially one that is accessible in various ways.
 Most often, the DB holds data needed to make a site functional. For Amazon, the product description, images, and reviews are kept in a large database. When a particular product is chosen, the associated information and reviews are queried in the Database by the Application Server.
 Together the DNS tells the browser what the IP address is, and the Client is connected to a Server via its IP address. Then the different server components work together to present a live, functional website.
@@ -88,26 +88,24 @@ Once a site becomes more highly trafficked, it is time to add additional power t
 When a website is scaled up with more servers, additional concerns become balancing the workload between servers. Also, increased traffic means increased chances of infiltration by hackers, so security becomes paramount.
 
 **Load Balancer**
-A load balancer is used when one website (domain name or IP address) uses more than one Server. The load balancer is the front-facing program that acts as a filter between the Client, the Internet and the Server.
+A [load balancer](nginx.com) is used when one website (domain name or IP address) uses more than one Server. The load balancer is the front-facing program that acts as a filter between the Client, the Internet and the Server.
 
 A load balancer acts as the “*traffic cop*” sitting in front of your servers and routing client requests across all servers, capable of fulfilling those requests in a manner that maximizes speed and capacity utilization and ensures that no one server is overworked, which could degrade performance. If a single server goes down, the load balancer redirects traffic to the remaining online servers. When a new server is added to the server group, the load balancer automatically starts to send requests to it.
 
-Typical load balancer setup
+**Typical load balancer setup**
 ![Load balancer](https://miro.medium.com/v2/resize:fit:1012/1*0_AxDGA6rGF8ESMifA6j8w.gif)
 
 Load balancers use special algorithms to direct traffic between servers. These are some of the algorithm designs used in load balancing:
 ***Round Robin*** (sometimes called “Next in Loop”).
-Weighted Round Robin — as Round Robin, but some servers get a larger share of the overall traffic.
-Random.
+- Weighted Round Robin — as Round Robin, but some servers get a larger share of the overall traffic.
+- Source IP hash*. Connections are distributed to backend servers based on the source IP address. Suppose a Webnode fails and is taken out of service; the distribution changes. As long as all servers are running, a given client IP address will always go to the same web server.
 
-*Source IP hash*. Connections are distributed to backend servers based on the source IP address. Suppose a Webnode fails and is taken out of service; the distribution changes. As long as all servers are running, a given client IP address will always go to the same web server.
-
-*URL hash*. Much like source IP hash, except hashing is done on the URL of the request. Useful when load balancing in front of proxy caches, as requests for a given object will always go to just one backend cache. 
-This avoids cache duplication, having the same object stored in several servers / *all caches*, and increases the effective capacity of the backend caches. Least connections, weighted least connections. 
+- URL hash*. Much like source IP hash, except hashing is done on the URL of the request. Useful when load balancing in front of proxy caches, as requests for a given object will always go to just one backend cache. 
+This avoids cache duplication, having the same object stored in several servers / *all caches*, and increases the effective capacity of the backend caches. ![Hashing](https://miro.medium.com/v2/resize:fit:1400/1*ug_v4qLamd3SurmLLW1oQw.gif)
+- Least connections, weighted least connections. 
 The load balancer monitors the number of open connections for each Server and sends it to the least busy Server.
-The least traffic weighted the least traffic. The load balancer monitors the bitrate from each Server and sends it to the Server that has the least outgoing traffic.
-
-*Least latency*. Perlbal makes a quick HTTP OPTIONS request to backend servers and sends the request to the first Server to answer.
+- The least traffic weighted the least traffic. The load balancer monitors the bitrate from each Server and sends it to the Server that has the least outgoing traffic.
+- Least latency*. Perlbal makes a quick HTTP OPTIONS request to backend servers and sends the request to the first Server to answer.
 
 #### References
 
