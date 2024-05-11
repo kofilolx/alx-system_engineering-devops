@@ -120,4 +120,3 @@ The least traffic weighted the least traffic. The load balancer monitors the bit
 7. [DNS](https://www.cloudflare.com/learning/dns/what-is-dns/)
 
 [*Watch this video also..*](https://www.google.com/url?sa=i&url=https://m.youtube.com/watch?v=dh406O2v_1c&psig=AOvVaw3pApYWtqb3SunzIRfIHzsP&ust=1715507440156000&source=images&cd=vfe&opi=89978449&ved=0CBQQjhxqFwoTCMC6sbKphYYDFQAAAAAdAAAAABAm)
-# DevOps
