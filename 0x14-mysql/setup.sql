@@ -1,0 +1,12 @@
+CREATE USER holberton_user@localhost IDENTIFIED BY "projectcorrection280hbtn";
+GRANT REPLICATION CLIENT ON *.* TO 'holberton_user'@'localhost';
+CREATE DATABASE tyrell_corp;
+USE tyrell_corp;
+CREATE TABLE wick(id INT AUTO_INCREMENT, username VARCHAR(50), PRIMARY KEY(id));
+INSERT INTO wick VALUES (0, "sandbox");
+GRANT SELECT ON tyrell_corp.wick TO holberton_user@localhost;
+CREATE USER replica_user@'%' IDENTIFIED BY "replica_user";
+GRANT REPLICATION SLAVE ON *.* TO 'replica_user'@'%';
+GRANT SELECT ON mysql.user TO holberton_user@localhost;
+CREATE USER web02@ 54.160.101.253 IDENTIFIED BY "web02";
+GRANT REPLICATION SLAVE ON *.* TO web02@34.227.101.160;
