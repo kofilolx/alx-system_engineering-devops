@@ -32,7 +32,3 @@ binlog_do_db    = tyrell_corp
 mysqldump -uroot -p"$1" --all-databases > backup.sql
 tar -cvzf "$(date +%d-%m-%Y)".tar.gz backup.sql
 
-projectcorrection280hbtn
-File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
-+------------------+----------+--------------+------------------+-------------------+
-| mysql-bin.000001 |      154 | tyrell_corp  |     
